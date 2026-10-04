@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Local environments and secrets
+.env
+*.env
+!.env.example
+
+# Generated OCR outputs
+paddle_output/
+paddle_evidence.json
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/*.local.json
