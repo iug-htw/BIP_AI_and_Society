@@ -17,7 +17,7 @@ from openai import (
 
 API_KEY = os.environ.get("HTW_API_KEY")
 BASE_URL = os.environ.get("HTW_BASE_URL")
-model = "MODELNAME"
+MODEL = "MODELNAME"
 
 if not API_KEY or not BASE_URL:
     raise RuntimeError("Set HTW_API_KEY and HTW_BASE_URL before running this script.")
@@ -35,12 +35,12 @@ def main() -> None:
     print("HTW OPENAI-COMPATIBLE API TEST")
     print("=" * 60)
 
-    print(f"\nUsing model: {model}")
+    print(f"\nUsing model: {MODEL}")
 
     print("\n[2] Chat completion...")
     start = time.time()
     response = client.chat.completions.create(
-        model=model,
+        model=MODEL,
         messages=[
             {"role": "system", "content": "You are a helpful assistant for HTW Berlin students."},
             {"role": "user", "content": "Explain what generative AI is in three short sentences."},
@@ -57,7 +57,7 @@ def main() -> None:
 
     print("\n[3] Streaming...")
     stream = client.chat.completions.create(
-        model=model,
+        model=MODEL,
         messages=[{"role": "user", "content": "Write a short two-sentence description of Berlin."}],
         stream=True,
     )
