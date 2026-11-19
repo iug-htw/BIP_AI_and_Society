@@ -6,7 +6,14 @@ Never commit real credentials to GitHub.
 
 import os
 import time
-from openai import OpenAI
+from openai import (
+    OpenAI,
+    APIConnectionError,
+    AuthenticationError,
+    RateLimitError,
+    APITimeoutError,
+    APIStatusError,
+)
 
 API_KEY = os.environ.get("HTW_API_KEY")
 BASE_URL = os.environ.get("HTW_BASE_URL")
@@ -14,7 +21,12 @@ BASE_URL = os.environ.get("HTW_BASE_URL")
 if not API_KEY or not BASE_URL:
     raise RuntimeError("Set HTW_API_KEY and HTW_BASE_URL before running this script.")
 
-client = OpenAI(api_key=API_KEY, base_url=BASE_URL)
+client = OpenAI(
+    api_key=API_KEY,
+    base_url=BASE_URL,
+    timeout=120.0,
+    max_retries=0,
+)
 
 
 def main() -> None:
@@ -46,6 +58,11 @@ def main() -> None:
     )
     print(response.choices[0].message.content)
     print(f"Response time: {time.time() - start:.2f} seconds")
+    if response.usage:
+    print("\nToken usage:")
+    print(f"Input tokens:  {response.usage.prompt_tokens}")
+    print(f"Output tokens: {response.usage.completion_tokens}")
+    print(f"Total tokens:  {response.usage.total_tokens}")
 
     print("\n[3] Streaming...")
     stream = client.chat.completions.create(
