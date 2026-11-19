@@ -53,3 +53,37 @@ python -m pip install -r requirements.txt
 - `examples/test_bvg.jpg` — sample image for the vision example.
 
 The exact endpoint URL, key, and available model IDs depend on the infrastructure used in class.
+
+## Running the examples
+
+### Text generation
+
+```bash
+python examples/test_htw_api.py
+```
+
+The script demonstrates:
+
+- Listing available models
+- Selecting a model
+- Sending a chat completion request
+- Measuring response time
+- Inspecting token usage
+- Streaming generated text
+- Measuring time to first text
+
+### Image understanding
+
+```bash
+python examples/test_htw_vision.py
+```
+
+Press Enter to use the provided sample image or enter
+the path to another local image.
+
+The script demonstrates:
+
+- Encoding an image in Base64
+- Sending a multimodal request
+- Generating an image description
+- Measuring response time and token usage
