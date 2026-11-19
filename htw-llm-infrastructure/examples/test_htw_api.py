@@ -17,6 +17,7 @@ from openai import (
 
 API_KEY = os.environ.get("HTW_API_KEY")
 BASE_URL = os.environ.get("HTW_BASE_URL")
+model = "MODELNAME"
 
 if not API_KEY or not BASE_URL:
     raise RuntimeError("Set HTW_API_KEY and HTW_BASE_URL before running this script.")
@@ -34,16 +35,6 @@ def main() -> None:
     print("HTW OPENAI-COMPATIBLE API TEST")
     print("=" * 60)
 
-    print("\n[1] Listing models...")
-    models = client.models.list()
-    for model in models.data:
-        print(f"  - {model.id}")
-
-    if not models.data:
-        print("No models returned by the server.")
-        return
-
-    model = models.data[0].id
     print(f"\nUsing model: {model}")
 
     print("\n[2] Chat completion...")
